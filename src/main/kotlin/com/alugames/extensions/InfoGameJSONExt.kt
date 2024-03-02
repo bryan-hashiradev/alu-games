@@ -7,6 +7,7 @@ fun InfoGameJSON.makeGame(): GameModel {
     return GameModel(
         this.titulo,
         this.capa,
-        this.descricao
+        this.descricao,
+        this.preco
     )
 }
