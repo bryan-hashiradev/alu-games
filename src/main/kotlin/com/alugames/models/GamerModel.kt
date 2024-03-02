@@ -51,6 +51,9 @@ data class GamerModel(val name: String, val email: String) {
         return Period.between(date, LocalDate.now()).years
     }
 
+    fun rentGame(game: GameModel, period: PeriodRent): GameRent {
+        return GameRent(this, game, period)
+    }
     override fun toString(): String {
         val age = getAge() ?: "Sem idade informada"
         return """
@@ -64,7 +67,6 @@ data class GamerModel(val name: String, val email: String) {
             ------------------------------------
         """.trimIndent()
     }
-
     companion object {
         fun criarGamer(scanner: Scanner): GamerModel {
             val name = getUserInput("Boas vindas ao AluGames! Vamos fazer seu cadastro. Digite seu nome: ", scanner)
