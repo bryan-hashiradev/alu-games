@@ -8,6 +8,6 @@ fun InfoGameJSON.makeGame(): GameModel {
         this.titulo,
         this.capa,
         this.descricao,
-        this.preco
+        this.preco.toBigDecimal()
     )
 }

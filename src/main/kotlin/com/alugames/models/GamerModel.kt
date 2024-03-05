@@ -1,6 +1,9 @@
 package com.alugames.models
 
+import com.alugames.extensions.isNoteValid
 import com.alugames.main.getUserInput
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
@@ -21,10 +24,10 @@ data class GamerModel(val name: String, val email: String): Recommended {
         private set
     var plan: Plan = DefaultPlan()
     val historySearch = mutableListOf<GameModel>()
-
     val historyRent = mutableListOf<GameRent>()
-    override val media: Double
-        get() = notes.average()
+    val recommendedGames = mutableListOf<GameModel>()
+    override val media: BigDecimal
+        get() = notes.average().toBigDecimal().setScale(2, RoundingMode.HALF_EVEN)
 
 
     constructor(name: String, email: String, birthDate: String, userName: String) : this(name, email) {
@@ -63,9 +66,15 @@ data class GamerModel(val name: String, val email: String): Recommended {
         historyRent.add(rent)
         return rent
     }
+    fun recommendAGame(game: GameModel, note: Int) {
+        if (note.isNoteValid()) {
+            game.recommend(note)
+            recommendedGames.add(game)
+        }
+    }
 
     override fun recommend(note: Int) {
-        notes.add(note)
+        if (note.isNoteValid()) notes.add(note)
     }
 
     override fun toString(): String {

@@ -1,28 +1,33 @@
 package com.alugames.models
 
+import com.alugames.extensions.isNoteValid
+import com.google.gson.annotations.Expose
+import java.math.BigDecimal
+import java.math.RoundingMode
+
 data class GameModel (
-    val title: String,
-    val thumb: String,
+    @Expose val title: String,
+    @Expose val thumb: String,
     ): Recommended {
     private val notes = mutableListOf<Int>()
     var description: String? = null
-    var price: Double? = null
-    override val media: Double
-        get() = notes.average()
+    var price: BigDecimal? = null
+    override val media: BigDecimal
+        get() = notes.average().toBigDecimal().setScale(2, RoundingMode.HALF_EVEN)
 
 
     constructor(
         title: String,
         thumb: String,
         description: String,
-        price: Double
+        price: BigDecimal
     ): this(title, thumb) {
         this.description = description
         this.price = price
     }
 
     override fun recommend(note: Int) {
-        TODO("Not yet implemented")
+        if (note.isNoteValid()) notes.add(note)
     }
 
     override fun toString(): String {
