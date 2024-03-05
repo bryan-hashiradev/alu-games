@@ -7,18 +7,25 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.random.Random
 
-data class GamerModel(val name: String, val email: String) {
+data class GamerModel(val name: String, val email: String): Recommended {
     private var birthDate: String? = null
+    private val notes = mutableListOf<Int>()
     var userName: String? = null
         set(value) {
             if (value.isNullOrBlank()) throw IllegalArgumentException("Nickname inválido!")
             field = value
             if(this.tagUser.isNullOrBlank()) this.generateIDUser()
         }
+
     var tagUser: String? = null
         private set
+    var plan: Plan = DefaultPlan()
+    val historySearch = mutableListOf<GameModel>()
 
-    val historySearch: MutableList<GameModel> = mutableListOf<GameModel>()
+    val historyRent = mutableListOf<GameRent>()
+    override val media: Double
+        get() = notes.average()
+
 
     constructor(name: String, email: String, birthDate: String, userName: String) : this(name, email) {
         this.userName = userName
@@ -42,7 +49,7 @@ data class GamerModel(val name: String, val email: String) {
         }
     }
 
-    fun getAge(): Int? {
+    private fun getAge(): Int? {
         if (birthDate.isNullOrBlank()) {
             return null
         }
@@ -52,8 +59,15 @@ data class GamerModel(val name: String, val email: String) {
     }
 
     fun rentGame(game: GameModel, period: PeriodRent): GameRent {
-        return GameRent(this, game, period)
+        val rent = GameRent(this, game, period)
+        historyRent.add(rent)
+        return rent
     }
+
+    override fun recommend(note: Int) {
+        notes.add(note)
+    }
+
     override fun toString(): String {
         val age = getAge() ?: "Sem idade informada"
         return """

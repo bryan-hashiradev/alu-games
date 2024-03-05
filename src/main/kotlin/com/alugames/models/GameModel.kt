@@ -1,9 +1,15 @@
 package com.alugames.models
 
-data class GameModel (val title: String,
-                      val thumb: String) {
+data class GameModel (
+    val title: String,
+    val thumb: String,
+    ): Recommended {
+    private val notes = mutableListOf<Int>()
     var description: String? = null
     var price: Double? = null
+    override val media: Double
+        get() = notes.average()
+
 
     constructor(
         title: String,
@@ -13,6 +19,10 @@ data class GameModel (val title: String,
     ): this(title, thumb) {
         this.description = description
         this.price = price
+    }
+
+    override fun recommend(note: Int) {
+        TODO("Not yet implemented")
     }
 
     override fun toString(): String {
