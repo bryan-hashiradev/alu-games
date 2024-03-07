@@ -5,10 +5,12 @@ import com.google.gson.annotations.Expose
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-data class GameModel (
+
+data class GameModel(
     @Expose val title: String,
     @Expose val thumb: String,
-    ): Recommended {
+) : Recommended {
+    var id = 0
     private val notes = mutableListOf<Int>()
     var description: String? = null
     var price: BigDecimal? = null
@@ -20,10 +22,12 @@ data class GameModel (
         title: String,
         thumb: String,
         description: String,
-        price: BigDecimal
-    ): this(title, thumb) {
+        price: BigDecimal,
+        id: Int = 0
+    ) : this(title, thumb) {
         this.description = description
         this.price = price
+        this.id = id
     }
 
     override fun recommend(note: Int) {
