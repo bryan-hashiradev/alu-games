@@ -6,15 +6,17 @@ import com.alugames.models.GameModel
 import com.alugames.services.APIGitHubContentsJSONService
 
 fun main () {
-//    val database = Database.getConnection()
-//    println(database)
-//    val gameList: List<GameModel> = Database.getGames()
-    val gamesDao = GamesDAO()
+    val entityManager = Database.getEntityMananger()
+    try {
+        val gamesDao = GamesDAO(entityManager)
+        val list = gamesDao.getGames()
+        list.forEach {
+            println(it)
+            println()
+        }
 
-    val list = gamesDao.getGames()
-
-    list.forEach {
-        println(it)
-        println()
+    } finally {
+        entityManager.close()
     }
+
 }
