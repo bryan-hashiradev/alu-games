@@ -11,7 +11,7 @@ import java.util.*
 import kotlin.random.Random
 
 data class GamerModel(val name: String, val email: String): Recommended {
-    private var birthDate: String? = null
+    var birthDate: String? = null
     private val notes = mutableListOf<Int>()
     var userName: String? = null
         set(value) {
@@ -26,13 +26,15 @@ data class GamerModel(val name: String, val email: String): Recommended {
     val historySearch = mutableListOf<GameModel>()
     val historyRent = mutableListOf<GameRent>()
     val recommendedGames = mutableListOf<GameModel>()
+    var id = 0
     override val media: BigDecimal
         get() = notes.average().toBigDecimal().setScale(2, RoundingMode.HALF_EVEN)
 
 
-    constructor(name: String, email: String, birthDate: String, userName: String) : this(name, email) {
+    constructor(name: String, email: String, birthDate: String?, userName: String?, id: Int = 0) : this(name, email) {
         this.userName = userName
         this.birthDate = birthDate
+        this.id = id
     }
 
     init {

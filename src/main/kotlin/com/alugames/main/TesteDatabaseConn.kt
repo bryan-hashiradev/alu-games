@@ -1,15 +1,13 @@
 package com.alugames.main
 
 import com.alugames.database.Database
-import com.alugames.database.GamesDAO
-import com.alugames.models.GameModel
-import com.alugames.services.APIGitHubContentsJSONService
+import com.alugames.database.GameDao
 
 fun main () {
     val entityManager = Database.getEntityMananger()
     try {
-        val gamesDao = GamesDAO(entityManager)
-        val list = gamesDao.getGames()
+        val gameDao = GameDao(entityManager)
+        val list = gameDao.getGames()
         list.forEach {
             println(it)
             println()

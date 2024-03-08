@@ -21,8 +21,8 @@ data class GameModel(
     constructor(
         title: String,
         thumb: String,
-        description: String,
-        price: BigDecimal,
+        description: String?,
+        price: BigDecimal?,
         id: Int = 0
     ) : this(title, thumb) {
         this.description = description

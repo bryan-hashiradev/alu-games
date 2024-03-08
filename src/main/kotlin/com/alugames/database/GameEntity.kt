@@ -11,9 +11,9 @@ data class GameEntity(
     @Column(name = "capa")
     val thumb: String = "thumb",
     @Column(name = "descricao")
-    val description: String = "description",
+    val description: String? = "description",
     @Column(name = "preco")
-    val price: BigDecimal = BigDecimal(0.0),
+    val price: BigDecimal? = BigDecimal(0.0),
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int = 0,
 )
