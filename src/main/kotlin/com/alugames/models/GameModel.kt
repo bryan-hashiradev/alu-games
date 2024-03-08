@@ -36,6 +36,7 @@ data class GameModel(
 
     override fun toString(): String {
         return """
+            ID: ${this.id}
             TITULO: ${this.title}
             CAPA: ${this.thumb}
             DESCRIÇÃO: ${this.description}

@@ -1,32 +1,26 @@
 package com.alugames.database
 
 import com.alugames.models.GameModel
-import java.math.BigDecimal
 import javax.persistence.EntityManager
 
-class GameDao(private val entityManager: EntityManager) {
-    fun getGames(): List<GameModel> {
-        val query = entityManager.createQuery("FROM GameEntity", GameEntity::class.java)
-        return query.resultList.map {
-            GameModel(
-                it.title,
-                it.thumb,
-                it.description,
-                it.price,
-                it.id
-            )
-        }
+class GameDao(entityManager: EntityManager): DAO<GameModel, GameEntity>(entityManager, GameEntity::class.java) {
+
+    override fun toModel(entity: GameEntity): GameModel {
+        return GameModel(
+            entity.title,
+            entity.thumb,
+            entity.description,
+            entity.price,
+            entity.id
+        )
     }
 
-    fun addGame(game: GameModel) {
-        val gameEntity = GameEntity(
-            game.title,
-            game.thumb,
-            game.description,
-            game.price,
+    override fun toEntity(model: GameModel): GameEntity {
+        return GameEntity(
+            model.title,
+            model.thumb,
+            model.description,
+            model.price
         )
-        entityManager.transaction.begin()
-        entityManager.persist(gameEntity)
-        entityManager.transaction.commit()
     }
 }

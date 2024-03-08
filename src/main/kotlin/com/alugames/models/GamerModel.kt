@@ -83,12 +83,13 @@ data class GamerModel(val name: String, val email: String): Recommended {
         val age = getAge() ?: "Sem idade informada"
         return """
             ------------------------------------
-            NOME: $name
-            DATA-NASCIMENTO: $birthDate
+            ID: ${this.id}
+            NOME: ${this.name}
+            DATA-NASCIMENTO: ${this.birthDate}
             IDADE: $age
-            E-MAIL: $email
-            TAG: $tagUser
-            NICK: $userName
+            E-MAIL: ${this.email}
+            TAG: ${this.tagUser}
+            NICK: ${this.userName}
             ------------------------------------
         """.trimIndent()
     }
