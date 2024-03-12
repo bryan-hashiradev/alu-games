@@ -1,12 +1,8 @@
 package com.alugames.main
 
 import com.alugames.database.Database
-import com.alugames.database.GameDao
 import com.alugames.database.GamerDAO
-import com.alugames.models.GameModel
 import com.alugames.services.APIGitHubContentsJSONService
-import java.math.BigDecimal
-import java.math.RoundingMode
 
 fun main () {
     val entityManager = Database.getEntityMananger()

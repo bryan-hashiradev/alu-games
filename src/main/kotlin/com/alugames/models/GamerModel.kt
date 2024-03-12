@@ -10,25 +10,31 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.random.Random
 
-data class GamerModel(val name: String, val email: String): Recommended {
+data class GamerModel(val name: String, val email: String) : Recommended {
     var birthDate: String? = null
     private val notes = mutableListOf<Int>()
     var userName: String? = null
         set(value) {
             if (value.isNullOrBlank()) throw IllegalArgumentException("Nickname inválido!")
             field = value
-            if(this.tagUser.isNullOrBlank()) this.generateIDUser()
+            if (this.tagUser.isNullOrBlank()) this.generateIDUser()
         }
 
     var tagUser: String? = null
         private set
-    var plan: Plan = DefaultPlan()
+    var plan: PlanModel = PlanDefaultModel()
     val historySearch = mutableListOf<GameModel>()
-    val historyRent = mutableListOf<GameRent>()
+    val historyRent = mutableListOf<GameRentModel>()
     val recommendedGames = mutableListOf<GameModel>()
     var id = 0
     override val media: BigDecimal
-        get() = notes.average().toBigDecimal().setScale(2, RoundingMode.HALF_EVEN)
+        get() {
+            return if (notes.isEmpty()) {
+                BigDecimal(0)
+            } else {
+                notes.average().toBigDecimal().setScale(2, RoundingMode.HALF_EVEN)
+            }
+        }
 
 
     constructor(name: String, email: String, birthDate: String?, userName: String?, id: Int = 0) : this(name, email) {
@@ -63,11 +69,12 @@ data class GamerModel(val name: String, val email: String): Recommended {
         return Period.between(date, LocalDate.now()).years
     }
 
-    fun rentGame(game: GameModel, period: PeriodRent): GameRent {
-        val rent = GameRent(this, game, period)
+    fun rentGame(game: GameModel, period: PeriodRent): GameRentModel {
+        val rent = GameRentModel(this, game, period)
         historyRent.add(rent)
         return rent
     }
+
     fun recommendAGame(game: GameModel, note: Int) {
         if (note.isNoteValid()) {
             game.recommend(note)
@@ -90,9 +97,11 @@ data class GamerModel(val name: String, val email: String): Recommended {
             E-MAIL: ${this.email}
             TAG: ${this.tagUser}
             NICK: ${this.userName}
+            PLANO: ${this.plan.type}
             ------------------------------------
         """.trimIndent()
     }
+
     companion object {
         fun criarGamer(scanner: Scanner): GamerModel {
             val name = getUserInput("Boas vindas ao AluGames! Vamos fazer seu cadastro. Digite seu nome: ", scanner)
@@ -105,7 +114,7 @@ data class GamerModel(val name: String, val email: String): Recommended {
 
                 return GamerModel(name, email, birthDate, userName)
             } else {
-                return GamerModel (name, email)
+                return GamerModel(name, email)
             }
         }
     }

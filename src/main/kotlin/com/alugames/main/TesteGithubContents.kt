@@ -1,6 +1,6 @@
 package com.alugames.main
 
-import com.alugames.models.FirstPlan
+import com.alugames.models.PlanSubscribeModel
 import com.alugames.services.APIGitHubContentsJSONService
 import com.google.gson.GsonBuilder
 import java.io.File
@@ -22,7 +22,7 @@ fun main() {
 //    val exampleGamer1 = gamers[0]
     val exampleGamer2 = gamers[1]
 //
-    exampleGamer2.plan = FirstPlan(fees = 9.0, gamesIncluded = 3, discountPercentage = BigDecimal(0.5))
+//    exampleGamer2.plan = PlanSubscribeModel(fees = 9.0, gamesIncluded = 3, discountPercentage = BigDecimal(0.5))
 //
 //    exampleGamer1.recommend(8)
 //    exampleGamer1.recommend(1)

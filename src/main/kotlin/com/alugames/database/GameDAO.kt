@@ -3,7 +3,7 @@ package com.alugames.database
 import com.alugames.models.GameModel
 import javax.persistence.EntityManager
 
-class GameDao(entityManager: EntityManager): DAO<GameModel, GameEntity>(entityManager, GameEntity::class.java) {
+class GameDAO(entityManager: EntityManager): DAO<GameModel, GameEntity>(entityManager, GameEntity::class.java) {
 
     override fun toModel(entity: GameEntity): GameModel {
         return GameModel(

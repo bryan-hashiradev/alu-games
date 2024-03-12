@@ -14,4 +14,7 @@ data class GamerEntity(
     val userName: String? = "default username",
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int = 0,
+    @ManyToOne(cascade = [CascadeType.PERSIST])
+    @JoinColumn(name = "id_plano")
+    val plan: PlanEntity = PlanDefaultEntity(),
 )

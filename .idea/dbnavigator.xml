@@ -17,29 +17,26 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="5d0e37eb-7d9a-40fe-b9f9-e7169536cbdf">
-      <console name="Connection" type="STANDARD" schema="alugames" session="Main"><![CDATA[select
-    j.capa,
-    j.descricao,
-    j.id,
-    j.preco,
-    j.titulo
-from
-    jogos j;]]></console>
+      <console name="Connection" type="STANDARD" schema="alugames" session="Main"><![CDATA[select * from planos
+
+select * from jogador
+
+select * from jogos]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="5d0e37eb-7d9a-40fe-b9f9-e7169536cbdf" object-ref="consoles/Connection" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="5d0e37eb-7d9a-40fe-b9f9-e7169536cbdf" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="5d0e37eb-7d9a-40fe-b9f9-e7169536cbdf" dataset="alugames.planos" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="5d0e37eb-7d9a-40fe-b9f9-e7169536cbdf" dataset="alugames.jogos" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="5d0e37eb-7d9a-40fe-b9f9-e7169536cbdf" dataset="alugames.jogador" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -74,7 +71,7 @@ from
           <deprecated-pwd value="RG92YWtpbkAzNzEx" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
         </properties>
         <ssh-settings>
           <active value="false" />

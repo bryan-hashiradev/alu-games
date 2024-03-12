@@ -1,5 +1,7 @@
 package com.alugames.database
 
+import com.alugames.extensions.toEntity
+import com.alugames.extensions.toModel
 import com.alugames.models.GamerModel
 import javax.persistence.EntityManager
 
@@ -11,7 +13,7 @@ class GamerDAO(entityManager: EntityManager): DAO<GamerModel, GamerEntity>(entit
             entity.birthDate,
             entity.userName,
             entity.id,
-        )
+        ).apply { this.plan = entity.plan.toModel() }
     }
 
     override fun toEntity(model: GamerModel): GamerEntity {
@@ -20,6 +22,8 @@ class GamerDAO(entityManager: EntityManager): DAO<GamerModel, GamerEntity>(entit
             model.email,
             model.birthDate,
             model.userName,
+            model.id,
+            model.plan.toEntity()
         )
     }
 }
